@@ -48,16 +48,16 @@ return packer.startup(function(use)
   use "numToStr/Comment.nvim" -- Easily comment stuff
   use "kyazdani42/nvim-web-devicons"
   use "kyazdani42/nvim-tree.lua"
-  use "akinsho/bufferline.nvim"
-  use "moll/vim-bbye"
+ -- use "akinsho/bufferline.nvim"
+ -- use "moll/vim-bbye"
   use "nvim-lualine/lualine.nvim"
-  use "akinsho/toggleterm.nvim"
-  use "ahmedkhalf/project.nvim"
+--  use "akinsho/toggleterm.nvim"
+--  use "ahmedkhalf/project.nvim"
   use "lewis6991/impatient.nvim"
   use "lukas-reineke/indent-blankline.nvim"
-  use "goolord/alpha-nvim"
+--  use "goolord/alpha-nvim"
   use "antoinemadec/FixCursorHold.nvim" -- This is needed to fix lsp doc highlight
-  use "folke/which-key.nvim"
+--  use "folke/which-key.nvim"
 
   -- Colorschemes
   -- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
@@ -93,6 +93,23 @@ return packer.startup(function(use)
 
   -- Git
   use "lewis6991/gitsigns.nvim"
+
+  -- tpope
+
+  -- use 'tpope/vim-commentary'
+  use 'tpope/vim-surround'
+  use 'tpope/vim-repeat'
+  use 'haya14busa/vim-asterisk'
+  use 'tpope/vim-obsession'
+
+  use 'tpope/vim-fugitive'
+  vim.cmd [[
+    nmap     <Leader>g :G<CR>gg<c-n>
+    " nnoremap <Leader>d :Gvdiff<CR>
+    nnoremap <nowait> <Leader>dd :Gvdiff<CR>
+  ]]
+
+  use 'junegunn/vim-peekaboo'
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

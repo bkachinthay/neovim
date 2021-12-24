@@ -1,3 +1,6 @@
+-- source a vimscript file
+vim.cmd('source /home/bharath/.vim/.vimrc.basic')
+
 require "user.options"
 require "user.keymaps"
 require "user.plugins"
