@@ -46,8 +46,8 @@ return packer.startup(function(use)
   use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
   use "windwp/nvim-autopairs" -- Autopairs, integrates with both cmp and treesitter
   use "numToStr/Comment.nvim" -- Easily comment stuff
-  use "kyazdani42/nvim-web-devicons"
-  use "kyazdani42/nvim-tree.lua"
+  -- use "kyazdani42/nvim-web-devicons"
+  -- use "kyazdani42/nvim-tree.lua"
  -- use "akinsho/bufferline.nvim"
  -- use "moll/vim-bbye"
   use "nvim-lualine/lualine.nvim"
@@ -110,6 +110,42 @@ return packer.startup(function(use)
   ]]
 
   use 'junegunn/vim-peekaboo'
+
+  -- Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
+   use {'mbbill/undotree', opt = true, cmd = {'UndotreeToggle'}}
+   vim.cmd [[
+    let g:undotree_WindowLayout = 2
+    nnoremap U :UndotreeToggle<CR>
+  ]]
+
+  use 'jpalardy/vim-slime'
+  vim.cmd [[
+    let g:slime_default_config={'socket_name': 'default', 'target_pane': '{right-of}'}
+    let g:slime_paste_file=tempname()
+    let g:slime_target='tmux'
+    xmap <Leader>r <Plug>SlimeRegionSend
+    nmap <Leader>r <Plug>SlimeParagraphSend
+    nmap <c-c>v     <Plug>SlimeConfig
+  ]]
+
+  use 'lambdalisue/fern.vim'
+  use 'lambdalisue/fern-git-status.vim'
+
+  -- misc
+  use 'tweekmonster/startuptime.vim'
+  use 'xiyaowong/nvim-transparent'
+  use 'nathom/filetype.nvim'
+
+  use 'norcalli/nvim-colorizer.lua'
+
+  -- https://0x0.st/orX5.txt
+  use 'p00f/nvim-ts-rainbow'
+
+  -- themes
+  use "RRethy/nvim-base16"
+  use "sainnhe/gruvbox-material"
+  use "folke/tokyonight.nvim"
+  vim.g.tokyonight_transparent = true
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
