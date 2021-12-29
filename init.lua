@@ -1,6 +1,6 @@
 require "user.impatient"
 -- source a vimscript file
-vim.cmd('source /home/bharath/.vim/.vimrc.basic')
+vim.cmd('source .vimrc.basic')
 
 -- require "user.options"
 -- require "user.keymaps"
