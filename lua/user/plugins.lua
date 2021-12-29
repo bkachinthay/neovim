@@ -144,6 +144,11 @@ return packer.startup(function(use)
   -- themes
   use "RRethy/nvim-base16"
   use "sainnhe/gruvbox-material"
+  -- use {"ellisonleao/gruvbox.nvim", requires = {"rktjmp/lush.nvim"}}
+  -- vim.cmd [[
+  -- hi Normal guibg=NONE ctermbg=NONE
+  -- ]]
+
   use "folke/tokyonight.nvim"
   vim.g.tokyonight_transparent = true
 
