@@ -46,6 +46,8 @@ return packer.startup(function(use)
   use("nvim-lua/plenary.nvim") -- Useful lua functions used ny lots of plugins
   use("windwp/nvim-autopairs") -- Autopairs, integrates with both cmp and treesitter
   use("numToStr/Comment.nvim") -- Easily comment stuff
+  -- use("tpope/vim-commentary")
+
   -- use "kyazdani42/nvim-web-devicons"
   -- use "kyazdani42/nvim-tree.lua"
   -- use "akinsho/bufferline.nvim"
@@ -61,7 +63,7 @@ return packer.startup(function(use)
 
   -- Colorschemes
   -- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
-  use("lunarvim/darkplus.nvim")
+  -- use("lunarvim/darkplus.nvim")
 
   -- cmp plugins
   use("hrsh7th/nvim-cmp") -- The completion plugin
@@ -82,7 +84,7 @@ return packer.startup(function(use)
   use("jose-elias-alvarez/null-ls.nvim") -- for formatters and linters
 
   -- Telescope
-  use("nvim-telescope/telescope.nvim")
+  -- use("nvim-telescope/telescope.nvim")
 
   use({ "junegunn/fzf", run = "fzf#install()" })
   use({
@@ -91,6 +93,7 @@ return packer.startup(function(use)
       local keymap = vim.api.nvim_set_keymap
       keymap("n", "<Leader>f", ":Files<CR>", { noremap = true, silent = true })
       keymap("n", "<Leader>b", ":Buffers<CR>", { noremap = true, silent = true })
+      keymap("n", "<Leader>l", ":Lines<CR>", { noremap = true, silent = true })
       vim.cmd([[
         let g:fzf_colors =
         \ { 'fg':      ['fg', 'Normal'],
@@ -117,8 +120,14 @@ return packer.startup(function(use)
   use("JoosepAlviste/nvim-ts-context-commentstring")
 
   -- Git
-  use("lewis6991/gitsigns.nvim")
-
+  -- use("lewis6991/gitsigns.nvim")
+  use("mhinz/vim-signify")
+  vim.cmd([[
+    let g:signify_sign_add               = '+'
+    let g:signify_sign_delete            = '_'
+    let g:signify_sign_delete_first_line = '‾'
+    let g:signify_sign_change            = '~'
+  ]])
   -- tpope
 
   -- use 'tpope/vim-commentary'
@@ -158,58 +167,60 @@ vim.cmd([[
 
   -- misc
   use("tweekmonster/startuptime.vim")
-  use("xiyaowong/nvim-transparent")
+  -- use("xiyaowong/nvim-transparent") -- enable if all the same
   use("nathom/filetype.nvim")
 
   -- Smooth Scrolling
-  use({
-    "karb94/neoscroll.nvim",
-    keys = { "<C-u>", "<C-d>", "gg", "G" },
-    config = function()
-    require("user.scroll")
-    end,
-  })
-  use({
-    "edluffy/specs.nvim",
-    after = "neoscroll.nvim",
-    config = function()
-      require("user.specs")
-    end,
-  })
+  -- use({
+  --   "karb94/neoscroll.nvim",
+  --   keys = { "<C-u>", "<C-d>", "gg", "G" },
+  --   config = function()
+  --   require("user.scroll")
+  --   end,
+  -- })
+  -- use({
+  --   "edluffy/specs.nvim",
+  --   after = "neoscroll.nvim",
+  --   config = function()
+  --     require("user.specs")
+  --   end,
+  -- })
 
+  use('ap/vim-css-color')
   -- use 'norcalli/nvim-colorizer.lua'
-  use({
-    "norcalli/nvim-colorizer.lua",
-    event = "BufReadPre",
-    config = function()
-      require("user.colorizer")
-    end,
-  })
+  -- use({
+  --   "norcalli/nvim-colorizer.lua",
+  --   event = "BufReadPre",
+  --   config = function()
+  --     require("user.colorizer")
+  --   end,
+  -- })
 
   -- https://0x0.st/orX5.txt
   use("p00f/nvim-ts-rainbow")
 
   -- themes
-  use("RRethy/nvim-base16")
-  use("sainnhe/gruvbox-material")
+  -- use("RRethy/nvim-base16")
+  -- use("sainnhe/gruvbox-material")
   -- use {"ellisonleao/gruvbox.nvim", requires = {"rktjmp/lush.nvim"}}
   -- vim.cmd [[
   -- hi Normal guibg=NONE ctermbg=NONE
   -- ]]
 
-  use("folke/tokyonight.nvim")
-  vim.g.tokyonight_transparent = true
+  -- use("folke/tokyonight.nvim")
+  -- vim.g.tokyonight_transparent = true
 
-  -- use { 'morhetz/gruvbox',
-  --   config = function()
-  --     -- require("user.colorizer")
-  --     vim.cmd [[
-  --       let g:gruvbox_transparent_bg=1
-  --       autocmd vimenter * colorscheme gruvbox
-  --       hi Normal guibg=NONE ctermbg=NONE
-  --     ]]
-  --   end,
-  -- }
+  -- use ( "ellisonleao/gruvbox.nvim" )
+  use { 'morhetz/gruvbox',
+    config = function()
+      -- require("user.colorizer")
+      vim.cmd [[
+        let g:gruvbox_transparent_bg=1
+        autocmd vimenter * colorscheme gruvbox
+        hi Normal guibg=NONE ctermbg=NONE
+      ]]
+    end,
+  }
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

@@ -12,7 +12,8 @@ null_ls.setup({
   debug = false,
   sources = {
     -- formatting.prettier.with({ extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" } }),
-    formatting.prettier,
+    -- formatting.prettier, -- toggle to enable auto formatting
+    formatting.eslint,
     formatting.black.with({ extra_args = { "--fast" } }),
     -- formatting.stylua.with({ extra_args = { "--config-path", "/home/bharath/.config/nvim/stylua.toml" } }),
     formatting.stylua,

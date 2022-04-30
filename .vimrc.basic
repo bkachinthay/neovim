@@ -148,6 +148,11 @@ map <C-l> <C-w>l
 nnoremap <tab>   <c-w>w
 nnoremap <S-tab> <c-w>W
 
+
+" stay in visual mode after indent
+xnoremap > >gv
+xnoremap < <gv
+
 " diff mapping
 nnoremap <Leader>dw :windo diffthis<CR>
 nnoremap <Leader>do :windo diffoff<CR>
