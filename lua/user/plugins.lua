@@ -40,7 +40,6 @@ packer.init({
 
 -- Install your plugins here
 return packer.startup(function(use)
-  -- My plugins here
   use("wbthomason/packer.nvim") -- Have packer manage itself
   use("nvim-lua/popup.nvim") -- An implementation of the Popup API from vim in Neovim
   use("nvim-lua/plenary.nvim") -- Useful lua functions used ny lots of plugins
@@ -48,22 +47,11 @@ return packer.startup(function(use)
   use("numToStr/Comment.nvim") -- Easily comment stuff
   -- use("tpope/vim-commentary")
 
-  -- use "kyazdani42/nvim-web-devicons"
-  -- use "kyazdani42/nvim-tree.lua"
-  -- use "akinsho/bufferline.nvim"
-  -- use "moll/vim-bbye"
+  -- use "moll/vim-bbye" -- Remove file from buffer
   use("nvim-lualine/lualine.nvim")
-  --  use "akinsho/toggleterm.nvim"
-  --  use "ahmedkhalf/project.nvim"
   use("lewis6991/impatient.nvim")
   use("lukas-reineke/indent-blankline.nvim")
-  --  use "goolord/alpha-nvim"
   use("antoinemadec/FixCursorHold.nvim") -- This is needed to fix lsp doc highlight
-  --  use "folke/which-key.nvim"
-
-  -- Colorschemes
-  -- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
-  -- use("lunarvim/darkplus.nvim")
 
   -- cmp plugins
   use("hrsh7th/nvim-cmp") -- The completion plugin
@@ -82,9 +70,6 @@ return packer.startup(function(use)
   use("williamboman/nvim-lsp-installer") -- simple to use language server installer
   use("tamago324/nlsp-settings.nvim") -- language server settings defined in json for
   use("jose-elias-alvarez/null-ls.nvim") -- for formatters and linters
-
-  -- Telescope
-  -- use("nvim-telescope/telescope.nvim")
 
   use({ "junegunn/fzf", run = "fzf#install()" })
   use({
@@ -120,7 +105,6 @@ return packer.startup(function(use)
   use("JoosepAlviste/nvim-ts-context-commentstring")
 
   -- Git
-  -- use("lewis6991/gitsigns.nvim")
   use("mhinz/vim-signify")
   vim.cmd([[
     let g:signify_sign_add               = '+'
@@ -139,8 +123,8 @@ return packer.startup(function(use)
   use("tpope/vim-fugitive")
 vim.cmd([[
     nmap     <Leader>g :G<CR>gg<c-n>
-    " nnoremap <Leader>d :Gvdiff<CR>
-    nnoremap <nowait> <Leader>dd :Gvdiff<CR>
+    nnoremap <Leader>d :Gvdiff<CR>
+    " nnoremap <nowait> <Leader>dd :Gvdiff<CR>
   ]])
 
   use("junegunn/vim-peekaboo")
@@ -170,50 +154,13 @@ vim.cmd([[
   -- use("xiyaowong/nvim-transparent") -- enable if all the same
   use("nathom/filetype.nvim")
 
-  -- Smooth Scrolling
-  -- use({
-  --   "karb94/neoscroll.nvim",
-  --   keys = { "<C-u>", "<C-d>", "gg", "G" },
-  --   config = function()
-  --   require("user.scroll")
-  --   end,
-  -- })
-  -- use({
-  --   "edluffy/specs.nvim",
-  --   after = "neoscroll.nvim",
-  --   config = function()
-  --     require("user.specs")
-  --   end,
-  -- })
-
   use('ap/vim-css-color')
-  -- use 'norcalli/nvim-colorizer.lua'
-  -- use({
-  --   "norcalli/nvim-colorizer.lua",
-  --   event = "BufReadPre",
-  --   config = function()
-  --     require("user.colorizer")
-  --   end,
-  -- })
 
-  -- https://0x0.st/orX5.txt
   use("p00f/nvim-ts-rainbow")
-
-  -- themes
-  -- use("RRethy/nvim-base16")
-  -- use("sainnhe/gruvbox-material")
-  -- use {"ellisonleao/gruvbox.nvim", requires = {"rktjmp/lush.nvim"}}
-  -- vim.cmd [[
-  -- hi Normal guibg=NONE ctermbg=NONE
-  -- ]]
-
-  -- use("folke/tokyonight.nvim")
-  -- vim.g.tokyonight_transparent = true
 
   -- use ( "ellisonleao/gruvbox.nvim" )
   use { 'morhetz/gruvbox',
     config = function()
-      -- require("user.colorizer")
       vim.cmd [[
         let g:gruvbox_transparent_bg=1
         autocmd vimenter * colorscheme gruvbox
