@@ -2,6 +2,10 @@ local fn = vim.fn
 
 -- Automatically install packer
 local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+-- print('----')
+-- print(install_path)
+-- print('----')
+-- :echo stdpath("config")
 if fn.empty(fn.glob(install_path)) > 0 then
   PACKER_BOOTSTRAP = fn.system({
     "git",
@@ -29,80 +33,59 @@ if not status_ok then
   return
 end
 
--- Have packer use a popup window
-packer.init({
-  display = {
-    open_fn = function()
-      return require("packer.util").float({ border = "rounded" })
-    end,
-  },
-})
-
 -- Install your plugins here
 return packer.startup(function(use)
   use("wbthomason/packer.nvim") -- Have packer manage itself
-  use("nvim-lua/popup.nvim") -- An implementation of the Popup API from vim in Neovim
-  use("nvim-lua/plenary.nvim") -- Useful lua functions used ny lots of plugins
-  use("windwp/nvim-autopairs") -- Autopairs, integrates with both cmp and treesitter
-  use("numToStr/Comment.nvim") -- Easily comment stuff
-  -- use("tpope/vim-commentary")
-
-  -- use "moll/vim-bbye" -- Remove file from buffer
-  use("nvim-lualine/lualine.nvim")
-  use("lewis6991/impatient.nvim")
-  use("lukas-reineke/indent-blankline.nvim")
-  use("antoinemadec/FixCursorHold.nvim") -- This is needed to fix lsp doc highlight
-
-  -- cmp plugins
-  use("hrsh7th/nvim-cmp") -- The completion plugin
-  use("hrsh7th/cmp-buffer") -- buffer completions
-  use("hrsh7th/cmp-path") -- path completions
-  use("hrsh7th/cmp-cmdline") -- cmdline completions
-  use("saadparwaiz1/cmp_luasnip") -- snippet completions
-  use("hrsh7th/cmp-nvim-lsp")
-
-  -- snippets
-  use("L3MON4D3/LuaSnip") --snippet engine
-  use("rafamadriz/friendly-snippets") -- a bunch of snippets to use
-
-  -- LSP
-  use("neovim/nvim-lspconfig") -- enable LSP
-  use("williamboman/nvim-lsp-installer") -- simple to use language server installer
-  use("tamago324/nlsp-settings.nvim") -- language server settings defined in json for
-  use("jose-elias-alvarez/null-ls.nvim") -- for formatters and linters
-
+  
+  -- Plugins START --
   use({ "junegunn/fzf", run = "fzf#install()" })
+  use({ "junegunn/fzf.vim" })
+
+  use("lambdalisue/fern.vim")
+  use("lambdalisue/fern-git-status.vim")
+
   use({
-    "junegunn/fzf.vim",
+    'rose-pine/neovim',
+    as = 'rose-pine',
     config = function()
-      local keymap = vim.api.nvim_set_keymap
-      keymap("n", "<Leader>f", ":Files<CR>", { noremap = true, silent = true })
-      keymap("n", "<Leader>b", ":Buffers<CR>", { noremap = true, silent = true })
-      keymap("n", "<Leader>l", ":Lines<CR>", { noremap = true, silent = true })
-      vim.cmd([[
-        let g:fzf_colors =
-        \ { 'fg':      ['fg', 'Normal'],
-        \ 'bg':      ['bg', 'Normal'],
-        \ 'hl':      ['fg', 'Comment'],
-        \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-        \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-        \ 'hl+':     ['fg', 'Statement'],
-        \ 'info':    ['fg', 'PreProc'],
-        \ 'prompt':  ['fg', 'Conditional'],
-        \ 'pointer': ['fg', 'Exception'],
-        \ 'marker':  ['fg', 'Keyword'],
-        \ 'spinner': ['fg', 'Label'],
-        \ 'header':  ['fg', 'Comment'] }
-        ]])
-    end,
+      vim.cmd('colorscheme rose-pine')
+    end
   })
 
-  -- Treesitter
-  use({
-    "nvim-treesitter/nvim-treesitter",
-    run = ":TSUpdate",
-  })
-  use("JoosepAlviste/nvim-ts-context-commentstring")
+  use({ "nvim-treesitter/nvim-treesitter", run = ':TSUpdate' })
+  -- use({ "nvim-treesitter/playground" })
+
+  use {
+    'VonHeikemen/lsp-zero.nvim',
+    branch = 'v2.x',
+    requires = {
+      -- LSP Support
+      {'neovim/nvim-lspconfig'},             -- Required
+      {                                      -- Optional
+        'williamboman/mason.nvim',
+        run = function()
+          pcall(vim.cmd, 'MasonUpdate')
+        end,
+      },
+      {'williamboman/mason-lspconfig.nvim'}, -- Optional
+
+      -- Autocompletion
+      {'hrsh7th/nvim-cmp'},     -- Required
+      {'hrsh7th/cmp-nvim-lsp'}, -- Required
+      {'L3MON4D3/LuaSnip'},     -- Required
+    }
+  }
+
+
+  use { "windwp/nvim-autopairs", commit = "4fc96c8f3df89b6d23e5092d31c866c53a346347" } -- Autopairs, integrates with both cmp and treesitter
+  use {
+    "numToStr/Comment.nvim",
+    -- config = function()
+    --   require('Comment').setup()
+    -- end,
+    commit = "97a188a98b5a3a6f9b1b850799ac078faa17ab67"
+  }
+  use { "JoosepAlviste/nvim-ts-context-commentstring", commit = "4d3a68c41a53add8804f471fcc49bb398fe8de08" }
 
   -- Git
   use("mhinz/vim-signify")
@@ -136,18 +119,15 @@ vim.cmd([[
     nnoremap U :UndotreeToggle<CR>
   ]])
 
-  use("jpalardy/vim-slime")
-  vim.cmd([[
-    let g:slime_default_config={'socket_name': 'default', 'target_pane': '{right-of}'}
-    let g:slime_paste_file=tempname()
-    let g:slime_target='tmux'
-    xmap <Leader>r <Plug>SlimeRegionSend
-    nmap <Leader>r <Plug>SlimeParagraphSend
-    nmap <c-c>v     <Plug>SlimeConfig
-  ]])
-
-  use("lambdalisue/fern.vim")
-  use("lambdalisue/fern-git-status.vim")
+  -- use("jpalardy/vim-slime")
+  -- vim.cmd([[
+  --   let g:slime_default_config={'socket_name': 'default', 'target_pane': '{right-of}'}
+  --   let g:slime_paste_file=tempname()
+  --   let g:slime_target='tmux'
+  --   xmap <Leader>r <Plug>SlimeRegionSend
+  --   nmap <Leader>r <Plug>SlimeParagraphSend
+  --   nmap <c-c>v     <Plug>SlimeConfig
+  -- ]])
 
   -- misc
   use("tweekmonster/startuptime.vim")
@@ -156,18 +136,17 @@ vim.cmd([[
 
   use('ap/vim-css-color')
 
-  use("p00f/nvim-ts-rainbow")
+  -- use { 'morhetz/gruvbox',
+  --   config = function()
+  --     vim.cmd [[
+  --       let g:gruvbox_transparent_bg=1
+  --       autocmd vimenter * colorscheme gruvbox
+  --       hi Normal guibg=NONE ctermbg=NONE
+  --     ]]
+  --   end,
+  -- }
 
-  -- use ( "ellisonleao/gruvbox.nvim" )
-  use { 'morhetz/gruvbox',
-    config = function()
-      vim.cmd [[
-        let g:gruvbox_transparent_bg=1
-        autocmd vimenter * colorscheme gruvbox
-        hi Normal guibg=NONE ctermbg=NONE
-      ]]
-    end,
-  }
+  -- Plugins END --
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
