@@ -55,13 +55,14 @@ return packer.startup(function(use)
   use({ "nvim-treesitter/nvim-treesitter", run = ':TSUpdate' })
   -- use({ "nvim-treesitter/playground" })
 
+  -- use { "RRethy/vim-illuminate", commit = "d6ca7f77eeaf61b3e6ce9f0e5a978d606df44298" }
   use {
     'VonHeikemen/lsp-zero.nvim',
     branch = 'v2.x',
     requires = {
       -- LSP Support
       { 'neovim/nvim-lspconfig' }, -- Required
-      {                          -- Optional
+      {                            -- Optional
         'williamboman/mason.nvim',
         run = function()
           pcall(vim.cmd, 'MasonUpdate')
@@ -70,12 +71,13 @@ return packer.startup(function(use)
       { 'williamboman/mason-lspconfig.nvim' }, -- Optional
 
       -- Autocompletion
-      { 'hrsh7th/nvim-cmp' },   -- Required
+      { 'hrsh7th/nvim-cmp' },     -- Required
       { 'hrsh7th/cmp-nvim-lsp' }, -- Required
-      { 'L3MON4D3/LuaSnip' },   -- Required
+      { 'L3MON4D3/LuaSnip' },     -- Required
     }
   }
 
+  use { "nvim-lualine/lualine.nvim", commit = "a52f078026b27694d2290e34efa61a6e4a690621" }
 
   use { "windwp/nvim-autopairs", commit = "4fc96c8f3df89b6d23e5092d31c866c53a346347" } -- Autopairs, integrates with both cmp and treesitter
   use {

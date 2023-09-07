@@ -6,7 +6,6 @@ end)
 
 lsp.ensure_installed({
   'tsserver',
-  -- 'prettier'
   -- 'shellcheck'
 })
 -- (Optional) Configure lua language server for neovim
