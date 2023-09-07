@@ -36,7 +36,7 @@ end
 -- Install your plugins here
 return packer.startup(function(use)
   use("wbthomason/packer.nvim") -- Have packer manage itself
-  
+
   -- Plugins START --
   use({ "junegunn/fzf", run = "fzf#install()" })
   use({ "junegunn/fzf.vim" })
@@ -60,19 +60,19 @@ return packer.startup(function(use)
     branch = 'v2.x',
     requires = {
       -- LSP Support
-      {'neovim/nvim-lspconfig'},             -- Required
-      {                                      -- Optional
+      { 'neovim/nvim-lspconfig' }, -- Required
+      {                          -- Optional
         'williamboman/mason.nvim',
         run = function()
           pcall(vim.cmd, 'MasonUpdate')
         end,
       },
-      {'williamboman/mason-lspconfig.nvim'}, -- Optional
+      { 'williamboman/mason-lspconfig.nvim' }, -- Optional
 
       -- Autocompletion
-      {'hrsh7th/nvim-cmp'},     -- Required
-      {'hrsh7th/cmp-nvim-lsp'}, -- Required
-      {'L3MON4D3/LuaSnip'},     -- Required
+      { 'hrsh7th/nvim-cmp' },   -- Required
+      { 'hrsh7th/cmp-nvim-lsp' }, -- Required
+      { 'L3MON4D3/LuaSnip' },   -- Required
     }
   }
 
@@ -104,7 +104,7 @@ return packer.startup(function(use)
   use("tpope/vim-obsession")
 
   use("tpope/vim-fugitive")
-vim.cmd([[
+  vim.cmd([[
     nmap     <Leader>g :G<CR>gg<c-n>
     nnoremap <Leader>d :Gvdiff<CR>
     " nnoremap <nowait> <Leader>dd :Gvdiff<CR>
